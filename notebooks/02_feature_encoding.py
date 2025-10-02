@@ -1,36 +1,18 @@
-# Feature Encoding & Preprocessing
+# 02_feature_encoding.ipynb
+# Feature Encoding & Dataset Preparation using src modules
 
-import pandas as pd
-import numpy as np
-from sklearn.preprocessing import LabelEncoder
-import kagglehub
+from src.kaggle_data import load_mental_disorders_dataset
+from src.data_preprocessing import preprocess_data, split_features_target
 
-# Load dataset
-path = kagglehub.dataset_download("mdsultanulislamovi/mental-disorders-dataset")
-df = pd.read_csv(path + "/mental_disorders_dataset.csv")
-
-# Encode ordinal variables
-ordinal_map = {'Seldom':1, 'Sometimes':2, 'Usually':3, 'Most-Often':4}
-ordinal_features = ['Sadness', 'Euphoric', 'Exhausted', 'Sleep dissorder']
-for col in ordinal_features:
-    df[col] = df[col].map(ordinal_map)
-
-# Extract numeric scale values from specific columns
-for col in df.columns[-4:-1]:
-    df[col] = df[col].astype(str).str.extract(r'(\d+)')
-
-# Label encoding for categorical variables
-lb = LabelEncoder()
-for i in range(5, len(df.columns)-4):
-    df.iloc[:, i] = lb.fit_transform(df.iloc[:, i])
-
-# Encode target variable
-df['Expert Diagnose'] = lb.fit_transform(df['Expert Diagnose'])
+# Load and preprocess dataset
+df_raw = load_mental_disorders_dataset()
+df = preprocess_data(df_raw)
 
 # Split features and target
-X = df.iloc[:, 1:-1]
-y = df['Expert Diagnose']
+X, y = split_features_target(df)
 
-# Save preprocessed dataset for modeling
-df.to_csv('data/preprocessed_mental_disorders.csv', index=False)
-print("Preprocessing complete. Dataset saved to 'data/preprocessed_mental_disorders.csv'")
+# Save preprocessed features and target for modeling
+X.to_csv('data/X_preprocessed.csv', index=False)
+y.to_csv('data/y_preprocessed.csv', index=False)
+
+print("Preprocessing complete. Features and target saved.")
