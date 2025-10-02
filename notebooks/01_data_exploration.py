@@ -30,3 +30,8 @@ plt.gca().add_artist(centre_circle)
 plt.title('Expert Diagnose')
 plt.axis('equal')  # make the pie circular
 plt.show()
+
+# Check unique values of ordinal features
+ordinal_features = ['Sadness', 'Euphoric', 'Exhausted', 'Sleep dissorder']
+for col in ordinal_features:
+    print(f"{col} unique values: {df[col].unique()}")
