@@ -57,7 +57,7 @@ Most patients are Depression or Normal, fewer in Bipolar categories.
 
 Visual inspection helps understand dataset balance.
 
-<img src="reports/figures/Expert-Diagnose.png" />
+<img src="reports/figures/Expert-Diagnose.png" height = 400/>
 
 Feature Distribution Example:
 
@@ -73,7 +73,7 @@ Used Random Forest feature importance.
 
 Feature Importance Plot:
 
-<img src="reports/figures/Feature-Imp.png" />
+<img src="reports/figures/Feature-Imp.png" width=1000 height=400/>
 
 The selected features maintain strong predictive power while reducing noise.
 
@@ -106,4 +106,4 @@ The selected features maintain strong predictive power while reducing noise.
 
 4. Balanced Evaluation: Using macro F1-score ensures fair assessment across all classes.
 
-<img src="reports/figures/model-comparison.png" alt="Random Forest v/s Multinomial Logistic Regression" />
+<img src="reports/figures/model-comparison.png" alt="Random Forest v/s Multinomial Logistic Regression" width=1000 height=400 />
